@@ -2,13 +2,13 @@
 
 module rv32i_ultra #
 (
-    // Parameters của Axi Master Bus Interface M00_AXI
+
     parameter integer C_M00_AXI_ADDR_WIDTH      = 32,
     parameter integer C_M00_AXI_DATA_WIDTH      = 32,
     parameter integer C_M00_AXI_TRANSACTIONS_NUM = 4
 )
 (
-    // Ports giao tiếp chuẩn AXI Master
+
     input wire  m00_axi_init_axi_txn,
     output wire  m00_axi_error,
     output wire  m00_axi_txn_done,
@@ -34,13 +34,11 @@ module rv32i_ultra #
     input wire  m00_axi_rvalid,
     output wire  m00_axi_rready,
 
-    // THÊM 2 CỔNG NÀY ĐỂ ĐƯA RA NGOÀI BLOCK DESIGN
     output wire [31:0] inst_addr,
     input  wire [31:0] inst_data
 );
 
-// Khởi tạo module Master Interface bên trong
-    rv32i_ultra_master_lite_v1_0_M00_AXI # ( 
+    rv32i_ultra_master_lite_v1_0_M00_AXI # (
         .C_M_AXI_ADDR_WIDTH(C_M00_AXI_ADDR_WIDTH),
         .C_M_AXI_DATA_WIDTH(C_M00_AXI_DATA_WIDTH)
     ) rv32i_ultra_master_lite_v1_0_M00_AXI_inst (
@@ -69,7 +67,6 @@ module rv32i_ultra #
         .M_AXI_RVALID(m00_axi_rvalid),
         .M_AXI_RREADY(m00_axi_rready),
 
-        // NỐI TÍN HIỆU TỪ MODULE CON RA NGOÀI CỔNG IP
         .INST_ADDR(inst_addr),
         .INST_DATA(inst_data)
     );
